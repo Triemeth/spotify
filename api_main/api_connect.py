@@ -1,30 +1,41 @@
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyOAuth
 import os
 from dotenv import load_dotenv
+from pathlib import Path
+import pandas as pd
 
+def get_playlist(sp):
+    playlists = sp.current_user_playlists()
+    playlist_data = []
 
-if __name__ == "__main__":
-    load_dotenv('/app/.env')
-
-    cli = os.getenv("CLIENT_ID")
-    secret = os.getenv("CLIENT_SECRET")
-
-    print(cli)
-    print(secret)
-
-    """client_credentials_manger = SpotifyClientCredentials(client_id = cli,
-                                                        client_secret = secret)
-    
-    sp = spotipy.Spotify(client_credentials_manger = client_credentials_manger)
-
-    playlists = sp.user_playlists('spotify')
     while playlists:
-        for i, playlist in enumerate(playlists['items']):
-            print(f"{i + 1 + playlists['offset']:4d} {playlist['uri']} {playlist['name']}")
-        if playlists['next']:
+        for playlist in playlists["items"]:
+            playlist_data.append({
+                "playlist_name": playlist['name'],
+                "playlist_id": playlist['id']
+            })
+        if playlists["next"]:
             playlists = sp.next(playlists)
         else:
-            playlists = None"""
+            break
 
+    playlist_df = pd.DataFrame(playlist_data)
+    return playlist_df
+
+if __name__ == "__main__":
+    load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
+
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
+        client_id=os.getenv("CLIENT_ID"),
+        client_secret=os.getenv("CLIENT_SECRET"),
+        redirect_uri=os.getenv("REDIRECT_URI"),  
+        scope="playlist-read-private playlist-read-collaborative"
+    ))
+
+    playlist_df = get_playlist(sp)
+    print(playlist_df)
+
+
+    
 #py -3.12 api_main/api_connect.py
