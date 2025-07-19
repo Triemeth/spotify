@@ -106,9 +106,45 @@ def get_recently_listened_to(sp, limit = 20):
 
 def get_top_track_and_artists(sp, limit_artist = 5, limit_song = 10):
 
+    short_art = []
+    med_art = []
+    long_art = []
+
     short_curr_artists = sp.current_user_top_artists(limit = limit_artist, time_range = 'short_term')
     med_curr_artists = sp.current_user_top_artists(limit = limit_artist, time_range = 'medium_term')
     long_curr_artists = sp.current_user_top_artists(limit = limit_artist, time_range = 'long_term')
+
+    for i in range(0, 5):
+        short_art.append({
+            "artist_name": short_curr_artists['items'][i]["name"],
+            "artist_genres": short_curr_artists["items"][i]["genres"],
+            "artist_popularity": short_curr_artists["items"][i]["popularity"],
+            "artist_followers": short_curr_artists["items"][i]["followers"],
+        })
+
+        med_art.append({
+            "artist_name": med_curr_artists['items'][i]["name"],
+            "artist_genres": med_curr_artists["items"][i]["genres"],
+            "artist_popularity": med_curr_artists["items"][i]["popularity"],
+            "artist_followers": med_curr_artists["items"][i]["followers"],
+        })
+
+        long_art.append({
+            "artist_name": long_curr_artists['items'][i]["name"],
+            "artist_genres": long_curr_artists["items"][i]["genres"],
+            "artist_popularity": long_curr_artists["items"][i]["popularity"],
+            "artist_followers": long_curr_artists["items"][i]["followers"],
+        })
+
+    short_art = pd.DataFrame(short_art)
+    med_art = pd.DataFrame(med_art)
+    long_art = pd.DataFrame(long_art)
+
+    short_art["time_frame"] = "short"
+    med_art["time_frame"] = "medium"
+    long_art["time_frame"] = "long"
+
+    artist_df = pd.concat([short_art, med_art, long_art])
 
     short_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'short_term')
     med_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'medium_term')
@@ -124,7 +160,7 @@ def get_top_track_and_artists(sp, limit_artist = 5, limit_song = 10):
 
     top_songs = pd.concat([short_songs_df, med_songs_df, long_songs_df])
 
-    return top_songs, short_curr_artists
+    return top_songs, artist_df
     
 if __name__ == "__main__":
     load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
@@ -136,18 +172,17 @@ if __name__ == "__main__":
         scope="playlist-read-private playlist-read-collaborative user-read-recently-played user-top-read"
     ))
 
-    playlist = get_playlists(sp)
-    recent_songs = get_recently_listened_to(sp)
-    track_list = get_playlist_songs(playlist, sp)
+    #playlist = get_playlists(sp)
+    #recent_songs = get_recently_listened_to(sp)
+    #track_list = get_playlist_songs(playlist, sp)
 
-    top_songs, short_curr_top_artists = get_top_track_and_artists(sp)
+    top_songs, top_artists = get_top_track_and_artists(sp)
+
+    #print(top_songs.head())
+    #print(recent_songs.head())
+    #print(track_list.head())
 
     print(top_songs.head())
-    print(playlist.head())
-    print(recent_songs.head())
-    print(track_list.head())
-    print(short_curr_top_artists)
-
-
+    print(top_artists.head())
 
 #py -3.12 api_main/api_connect.py
