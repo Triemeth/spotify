@@ -11,23 +11,52 @@ def get_song_info(some_list, sp):
 
     while some_list:
         for song in some_list['items']:
-            name_hold = song['track']['artists'][0]['name']
+            if 'track' in song:
+                name_hold = song['track']['artists'][0]['name']
 
-            artist = sp.search(q=f"artist:{name_hold}", type="artist", limit=1)
-            artist_info = artist['artists']['items'][0]
-            artist_genre = artist_info.get('genres', [])
+                artist = sp.search(q=f"artist:{name_hold}", type="artist", limit=1)
+                items = artist['artists']['items']
 
-            return_list.append({
-                "track_name": song['track']['name'],
-                "artist_name": name_hold,
-                "artist_genre": artist_genre,
-                "album_name": song['track']['album']['name'],
-                "release_date": song['track']['album']['release_date'],
-                "album_track_amount": song['track']['album']['total_tracks'],
-                "song_duration_minutes": song['track']['duration_ms'] * 1.66667e-5,
-                "popularity_score": song['track']['popularity'],
-                "track_number_on_album": song['track']["track_number"]
-            })
+                if not items:
+                    artist_genre = []
+                else:
+                    artist_info = items[0]
+                    artist_genre = artist_info.get('genres', [])
+
+                return_list.append({
+                    "track_name": song['track']['name'],
+                    "artist_name": name_hold,
+                    "artist_genre": artist_genre,
+                    "album_name": song['track']['album']['name'],
+                    "release_date": song['track']['album']['release_date'],
+                    "album_track_amount": song['track']['album']['total_tracks'],
+                    "song_duration_minutes": song['track']['duration_ms'] * 1.66667e-5,
+                    "popularity_score": song['track']['popularity'],
+                    "track_number_on_album": song['track']["track_number"]
+                })
+            else:
+                name_hold = song['artists'][0]['name']
+
+                artist = sp.search(q=f"artist:{name_hold}", type="artist", limit=1)
+                items = artist['artists']['items']
+
+                if not items:
+                    artist_genre = []
+                else:
+                    artist_info = items[0]
+                    artist_genre = artist_info.get('genres', [])
+
+                return_list.append({
+                    "track_name": song['name'],
+                    "artist_name": name_hold,
+                    "artist_genre": artist_genre,
+                    "album_name": song['album']['name'],
+                    "release_date": song['album']['release_date'],
+                    "album_track_amount": song['album']['total_tracks'],
+                    "song_duration_minutes": song['duration_ms'] * 1.66667e-5,
+                    "popularity_score": song['popularity'],
+                    "track_number_on_album": song["track_number"]
+                })
         if some_list["next"]:
             some_list = sp.next(some_list)
         else:
@@ -76,11 +105,27 @@ def get_recently_listened_to(sp, limit = 20):
     return recent_song_df
 
 def get_top_track_and_artists(sp, limit_artist = 5, limit_song = 10):
+
     short_curr_artists = sp.current_user_top_artists(limit = limit_artist, time_range = 'short_term')
     med_curr_artists = sp.current_user_top_artists(limit = limit_artist, time_range = 'medium_term')
     long_curr_artists = sp.current_user_top_artists(limit = limit_artist, time_range = 'long_term')
 
+    short_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'short_term')
+    med_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'medium_term')
+    long_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'long_term')
 
+    short_songs_df = get_song_info(short_curr_songs, sp)
+    med_songs_df = get_song_info(med_curr_songs, sp)
+    long_songs_df = get_song_info(long_curr_songs, sp)
+
+    short_songs_df["term"] = "short"
+    med_songs_df["term"] = "medium"
+    long_songs_df["term"] = "long"
+
+    top_songs = pd.concat([short_songs_df, med_songs_df, long_songs_df])
+
+    return top_songs, short_curr_artists
+    
 if __name__ == "__main__":
     load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
@@ -93,6 +138,16 @@ if __name__ == "__main__":
 
     playlist = get_playlists(sp)
     recent_songs = get_recently_listened_to(sp)
-    test_track_list = get_playlist_songs(playlist, sp)
+    track_list = get_playlist_songs(playlist, sp)
+
+    top_songs, short_curr_top_artists = get_top_track_and_artists(sp)
+
+    print(top_songs.head())
+    print(playlist.head())
+    print(recent_songs.head())
+    print(track_list.head())
+    print(short_curr_top_artists)
+
+
 
 #py -3.12 api_main/api_connect.py
