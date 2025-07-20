@@ -1,0 +1,16 @@
+,artist_name,artist_genres,artist_popularity,artist_followers,time_frame
+0,Papa Roach,"['nu metal', 'rap metal', 'alternative metal', 'rap rock', 'rock']",76,"{'href': None, 'total': 5900287}",short
+1,Breaking Benjamin,"['alternative metal', 'post-grunge', 'rock', 'hard rock']",75,"{'href': None, 'total': 5049149}",short
+2,Red Hot Chili Peppers,"['funk rock', 'alternative rock', 'rock']",86,"{'href': None, 'total': 22757354}",short
+3,Kid Cudi,[],81,"{'href': None, 'total': 7568178}",short
+4,Seiko Matsuda,"['kayokyoku', 'city pop', 'enka', 'j-pop']",59,"{'href': None, 'total': 471854}",short
+0,Counting Crows,[],73,"{'href': None, 'total': 1918520}",medium
+1,Led Zeppelin,"['classic rock', 'rock', 'hard rock', 'rock and roll']",80,"{'href': None, 'total': 15659654}",medium
+2,Pepper,"['reggae rock', 'reggae', 'ska']",60,"{'href': None, 'total': 423916}",medium
+3,Blues Traveler,['jam band'],62,"{'href': None, 'total': 729140}",medium
+4,Cage The Elephant,[],77,"{'href': None, 'total': 4204203}",medium
+0,Cage The Elephant,[],77,"{'href': None, 'total': 4204203}",long
+1,Toadies,"['grunge', 'alternative rock']",52,"{'href': None, 'total': 329997}",long
+2,TOOL,"['progressive metal', 'alternative metal', 'progressive rock', 'metal']",74,"{'href': None, 'total': 4346258}",long
+3,Pearl Jam,"['grunge', 'rock', 'post-grunge']",78,"{'href': None, 'total': 9710881}",long
+4,Red Hot Chili Peppers,"['funk rock', 'alternative rock', 'rock']",86,"{'href': None, 'total': 22757354}",long

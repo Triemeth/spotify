@@ -5,8 +5,9 @@ from dotenv import load_dotenv
 from pathlib import Path
 import pandas as pd
 import numpy as np
+from sqlalchemy import create_engine
 
-def get_song_info(some_list, sp):
+def get_song_info(some_list, sp, paginate=True):
     return_list = []
 
     while some_list:
@@ -57,7 +58,7 @@ def get_song_info(some_list, sp):
                     "popularity_score": song['popularity'],
                     "track_number_on_album": song["track_number"]
                 })
-        if some_list["next"]:
+        if paginate and some_list.get("next"):
             some_list = sp.next(some_list)
         else:
             break
@@ -104,7 +105,7 @@ def get_recently_listened_to(sp, limit = 20):
 
     return recent_song_df
 
-def get_top_track_and_artists(sp, limit_artist = 5, limit_song = 10):
+def get_top_track_and_artists(sp, limit_artist = 15, limit_song = 25):
 
     short_art = []
     med_art = []
@@ -150,9 +151,9 @@ def get_top_track_and_artists(sp, limit_artist = 5, limit_song = 10):
     med_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'medium_term')
     long_curr_songs = sp.current_user_top_tracks(limit = limit_song, time_range = 'long_term')
 
-    short_songs_df = get_song_info(short_curr_songs, sp)
-    med_songs_df = get_song_info(med_curr_songs, sp)
-    long_songs_df = get_song_info(long_curr_songs, sp)
+    short_songs_df = get_song_info(short_curr_songs, sp, paginate=False)
+    med_songs_df = get_song_info(med_curr_songs, sp, paginate=False)
+    long_songs_df = get_song_info(long_curr_songs, sp, paginate=False)
 
     short_songs_df["term"] = "short"
     med_songs_df["term"] = "medium"
@@ -172,17 +173,26 @@ if __name__ == "__main__":
         scope="playlist-read-private playlist-read-collaborative user-read-recently-played user-top-read"
     ))
 
-    #playlist = get_playlists(sp)
-    #recent_songs = get_recently_listened_to(sp)
-    #track_list = get_playlist_songs(playlist, sp)
-
+    playlist = get_playlists(sp)
+    recent_songs = get_recently_listened_to(sp)
+    track_list = get_playlist_songs(playlist, sp)
     top_songs, top_artists = get_top_track_and_artists(sp)
 
-    #print(top_songs.head())
-    #print(recent_songs.head())
-    #print(track_list.head())
+    """recent_songs.to_csv("csv_data/recent_songs.csv")
+    track_list.to_csv("csv_data/all_tracks_saved.csv")
+    top_songs.to_csv("csv_data/top_songs.csv")
+    top_artists.to_csv("csv_data/top_artists.csv")"""
 
-    print(top_songs.head())
-    print(top_artists.head())
+    db_user = os.getenv("POSTGRES_USER")
+    db_pass = os.getenv("POSTGRES_PASSWORD")
+    db_host = os.getenv("POSTGRES_HOST")
+    db_port = os.getenv("POSTGRES_PORT")
+    db_name = os.getenv("POSTGRES_DB")
 
-#py -3.12 api_main/api_connect.py
+    engine = create_engine(f"postgresql+psycopg2://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}")
+
+    recent_songs.to_sql("recent_songs", engine, if_exists="replace", index=False)
+    track_list.to_sql("all_tracks_saved", engine, if_exists="replace", index=False)
+    top_songs.to_sql("top_songs", engine, if_exists="replace", index=False)
+    top_artists.to_sql("top_artists", engine, if_exists="replace", index=False)
+#py -3.12 api_main/get_data.py

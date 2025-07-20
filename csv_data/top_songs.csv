@@ -1,0 +1,76 @@
+,track_name,artist_name,artist_genre,album_name,release_date,album_track_amount,song_duration_minutes,popularity_score,track_number_on_album,term
+0,The Diary of Jane - Single Version,Breaking Benjamin,"['alternative metal', 'post-grunge', 'rock', 'hard rock']",Phobia (Clean Version),2006-01-01,13,3.3424400182,79,2,short
+1,Savior,Rise Against,"['punk', 'hardcore punk']",Appeal To Reason,2008-01-01,14,4.038008076000001,81,11,short
+2,love.,Kid Cudi,[],The Boy Who Flew To The Moon (Vol. 1),2022-07-08,18,5.4762276191,65,18,short
+3,Lakini's Juice,Live,"['post-grunge', 'grunge']",Secret Samadhi,1997-01-01,12,4.9877766422,58,2,short
+4,Already Gone,Crossfade,['post-grunge'],Falling Away,2006-08-29,11,3.4362235391000002,53,2,short
+5,Loose Talk,Show Me the Body,['noise rock'],Trouble The Water,2022-10-28,12,3.4374568749,40,1,short
+6,Metallic Taste,Show Me the Body,['noise rock'],Body War,2016-07-08,10,3.228673124,49,6,short
+7,MONEY ON THE DASH,Elley Duhé,[],MONEY ON THE DASH,2023-01-20,2,2.4277715222,56,1,short
+8,Look At You,Screaming Trees,"['grunge', 'post-grunge']",Dust,1996-06-20,10,4.7000094,35,3,short
+9,Alright - 2015 Remaster,Supergrass,['britpop'],I Should Coco (20th Anniversary Collector's Edition),1995-05-15,58,3.0211060422,78,4,short
+10,Help,Papa Roach,"['nu metal', 'rap metal', 'alternative metal', 'rap rock', 'rock']",Crooked Teeth (Deluxe),2017-05-19,29,3.5799571599,72,7,short
+11,250 Miles,Radio Moscow,"['stoner rock', 'blues rock', 'modern blues', 'psychedelic rock', 'stoner metal', 'space rock', 'neo-psychedelic']",Brain Cycles,2009-04-14,10,4.8666764,55,6,short
+12,Punching In A Dream,The Naked And Famous,[],"Passive Me, Aggressive You",2010,13,3.9688912711000004,66,2,short
+13,Cobrastyle (feat. Mad Cobra) - As featured in Superman,Teddybears,[],Fresh,2004-08-18,11,2.9975559951000004,61,1,short
+14,Between Angels And Insects,Papa Roach,"['nu metal', 'rap metal', 'alternative metal', 'rap rock', 'rock']",Infest,2000-04-25,13,3.9077744822000002,72,5,short
+15,Lazaretto,Jack White,['blues rock'],Lazaretto,2014-06-10,11,3.6566739800000003,58,2,short
+16,Disparate Youth,Santigold,[],Master of My Make-Believe,2012-04-16,11,4.74000948,74,2,short
+17,Superstar,Saliva,"['nu metal', 'rap metal']",Every Six Seconds,2001-03-27,12,4.06000812,62,1,short
+18,All Washed Up,The Urge,"['ska punk', 'ska']",Receiving The Gift Of Flavor,1996-08-20,13,3.3788900911,33,2,short
+19,A Life of Illusion,Joe Walsh,"['classic rock', 'southern rock']",There Goes the Neighborhood,1981,8,3.5088903511000002,61,5,short
+20,Metalingus,Alter Bridge,"['post-grunge', 'alternative metal', 'hard rock']",One Day Remains,2004-08-10,11,4.3326586653,70,5,short
+21,Long Way Down,The Goo Goo Dolls,[],A Boy Named Goo,1995,13,3.4751069502000003,55,1,short
+22,Sirens,Pearl Jam,"['grunge', 'rock', 'post-grunge']",Lightning Bolt,2013-01-01,12,5.672011344,68,4,short
+23,Hook,Blues Traveler,['jam band'],Four,1994-01-01,12,4.82000964,71,9,short
+24,Love Rears Its Ugly Head,Living Colour,"['funk rock', 'hard rock']",Time's Up,1990-08-28,15,4.324441982200001,49,4,short
+0,Sooner Or Later,Breaking Benjamin,"['alternative metal', 'post-grunge', 'rock', 'hard rock']",We Are Not Alone,2004-01-01,12,3.64667396,56,7,medium
+1,The Diary of Jane - Single Version,Breaking Benjamin,"['alternative metal', 'post-grunge', 'rock', 'hard rock']",Phobia (Clean Version),2006-01-01,13,3.3424400182,79,2,medium
+2,Transdermal Celebration,Ween,['neo-psychedelic'],Quebec,2003-08-05,15,3.4333402000000004,53,3,medium
+3,Savior,Rise Against,"['punk', 'hardcore punk']",Appeal To Reason,2008-01-01,14,4.038008076000001,81,11,medium
+4,Antpile 2,Kublai Khan TX,"['hardcore', 'deathcore', 'metalcore']",Exhibition Of Prowess,2024-09-20,10,0.9482852299000001,56,10,medium
+5,War Pigs,CAKE,['alternative rock'],b-sides and rarities,2007-11-13,12,3.9002244671,57,1,medium
+6,Take Out the Gunman,Chevelle,"['alternative metal', 'nu metal', 'post-grunge', 'hard rock']",La Gárgola,2014-04-01,10,4.3157752982,56,3,medium
+7,Cobrastyle (feat. Mad Cobra) - As featured in Superman,Teddybears,[],Fresh,2004-08-18,11,2.9975559951000004,61,1,medium
+8,Kool-Aid,Bring Me The Horizon,"['metalcore', 'emo', 'screamo', 'rock', 'post-hardcore']",POST HUMAN: NeX GEn,2024-05-24,16,3.807840949,71,3,medium
+9,Cold,Crossfade,['post-grunge'],Crossfade,2004-04-13,10,3.2371064742,76,2,medium
+10,Carolina Blues,Blues Traveler,['jam band'],Straight On Till Morning,1997-01-01,13,4.741776150200001,50,1,medium
+11,Bring Me Along,Pepper,"['funk rock', 'alternative rock', 'rock']",No Shame,2006-10-03,18,3.5497737662000004,56,1,medium
+12,Disturbia,Rihanna,[],Good Girl Gone Bad: Reloaded,2007-03-31,16,3.9762246191000004,69,14,medium
+13,No Control,Pepper,"['funk rock', 'alternative rock', 'rock']",No Shame,2006-10-03,18,3.2151064302,45,3,medium
+14,Alone In A Room,Asking Alexandria,"['metalcore', 'screamo', 'post-hardcore', 'metal', 'emo']",Asking Alexandria,2017-12-15,13,4.0976915287,69,1,medium
+15,Stone Love,Pepper,"['funk rock', 'alternative rock', 'rock']",Kona Town,2002-03-26,13,4.246675160000001,67,2,medium
+16,love.,Kid Cudi,[],The Boy Who Flew To The Moon (Vol. 1),2022-07-08,18,5.4762276191,65,18,medium
+17,Ho's,Pepper,"['funk rock', 'alternative rock', 'rock']",Kona Town,2002-03-26,13,3.4615569231000003,55,7,medium
+18,Open Up,DISPATCH,['jam band'],Who Are We Living for?,2000-10-10,21,4.773776214200001,50,2,medium
+19,Parklife - 2012 Remaster,Blur,"['britpop', 'madchester', 'alternative rock']",Parklife (Special Edition),1994-04-25,32,3.0848895031000003,68,4,medium
+20,Six Days - Remix,DJ Shadow,"['trip hop', 'downtempo']",Six Days,2002-01-01,3,3.8755577511,71,1,medium
+21,Disparate Youth,Santigold,[],Master of My Make-Believe,2012-04-16,11,4.74000948,74,2,medium
+22,Lazaretto,Jack White,['blues rock'],Lazaretto,2014-06-10,11,3.6566739800000003,58,2,medium
+23,Vitamin R (Leading Us Along),Chevelle,"['alternative metal', 'nu metal', 'post-grunge', 'hard rock']",This Type Of Thinking (Could Do Us In),2004-09-21,11,3.7195574391000004,66,3,medium
+24,Hook,Blues Traveler,['jam band'],Four,1994-01-01,12,4.82000964,71,9,medium
+0,Antpile 2,Kublai Khan TX,"['hardcore', 'deathcore', 'metalcore']",Exhibition Of Prowess,2024-09-20,10,0.9482852299000001,56,10,long
+1,In Bloom,Sturgill Simpson,"['outlaw country', 'alt country', 'bluegrass', 'americana', 'red dirt', 'country']",A Sailor's Guide to Earth,2016-04-15,9,4.010674688,59,5,long
+2,Killed By An Angel,Sunny Day Real Estate,"['midwest emo', 'emo', 'post-hardcore', 'math rock']",The Rising Tide,2000-06-20,11,4.9255598511,45,1,long
+3,Beer,Reel Big Fish,"['ska', 'ska punk', 'punk']",Turn The Radio Off,1996,15,3.5088903511000002,61,6,long
+4,Concorde,"Black Country, New Road","['art rock', 'post-rock', 'post-punk']",Ants From Up There,2022-02-04,10,6.0628954591,58,3,long
+5,Better Man,Pearl Jam,"['grunge', 'rock', 'post-grunge']",Vitalogy,1994-11-22,17,4.4764422862,72,11,long
+6,Something Special,Pearl Jam,"['grunge', 'rock', 'post-grunge']",Dark Matter,2024-04-19,11,4.1146248959000005,49,9,long
+7,Black Sheep - Brie Larson Vocal Version,Metric,[],Black Sheep (Brie Larson Vocal Version),2010,1,4.9010931355,74,1,long
+8,The Dolphin's Cry,Live,"['post-grunge', 'grunge']",The Distance To Here,1999-01-01,13,4.402675472,61,1,long
+9,Dinosaur,"Hank Williams, Jr.","['outlaw country', 'classic country', 'country', 'honky tonk', 'country rock']",Habits Old And New,1980-06-01,10,3.3277733222,72,2,long
+10,Jesus Walks,Kanye West,['rap'],The College Dropout,2004-02-10,21,3.2288897911000003,71,7,long
+11,Faint,Linkin Park,"['nu metal', 'rap metal', 'rock', 'alternative metal']",Meteora,2003-03-25,13,2.7017720702,86,7,long
+12,Run-Around,Blues Traveler,['jam band'],Four,1994-01-01,12,4.6633426600000005,74,1,long
+13,"You Think I Ain't Worth A Dollar, But I Feel Like A Millionaire",Queens of the Stone Age,"['stoner rock', 'alternative rock']",Songs For The Deaf,2002,15,3.2095564191,60,2,long
+14,Snot,Snot,"['nu metal', 'rap metal', 'alternative metal', 'funk rock']",Get Some,1997-01-01,15,3.3655567311000003,61,1,long
+15,Push,Matchbox Twenty,['post-grunge'],Yourself or Someone Like You,1996-10-01,12,3.9777746222,77,4,long
+16,The Rain,The Suitcase Junket,['roots rock'],Dying Star,2016-03-04,7,3.452673572,2,5,long
+17,Turtles All the Way Down,Sturgill Simpson,"['outlaw country', 'alt country', 'bluegrass', 'americana', 'red dirt', 'country']",Metamodern Sounds in Country Music,2014-05-13,10,3.1364396062,64,1,long
+18,Look Around,Red Hot Chili Peppers,"['funk rock', 'alternative rock', 'rock']",I'm with You,2011-08-29,14,3.4666736,59,6,long
+19,Sooner Or Later,Breaking Benjamin,"['alternative metal', 'post-grunge', 'rock', 'hard rock']",We Are Not Alone,2004-01-01,12,3.64667396,56,7,long
+20,New Noise,Refused,"['hardcore punk', 'post-hardcore', 'punk', 'hardcore']",The New Noise Theology EP,1998-11-17,4,5.212010424000001,52,1,long
+21,State of Love and Trust,Pearl Jam,"['grunge', 'rock', 'post-grunge']",Singles - Original Motion Picture Soundtrack,1992-06-02,13,3.7866742400000004,51,8,long
+22,The Diary of Jane - Single Version,Breaking Benjamin,"['alternative metal', 'post-grunge', 'rock', 'hard rock']",Phobia (Clean Version),2006-01-01,13,3.3424400182,79,2,long
+23,Mountain Sound,Of Monsters and Men,['folk pop'],My Head Is An Animal,2012-01-01,12,3.5242237151,68,3,long
+24,Interstate Love Song - 2019 Remaster,Stone Temple Pilots,"['grunge', 'alternative rock', 'post-grunge', 'rock']",Purple (2019 Remaster),1994-06-07,11,3.2475564951,79,4,long

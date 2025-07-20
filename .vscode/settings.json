@@ -1,17 +1,14 @@
 {
     "sqltools.connections": [
         {
-            "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
-            },
             "previewLimit": 50,
             "server": "localhost",
-            "port": 3306,
-            "driver": "MySQL",
-            "name": "MySQL Local",
-            "database": "Spotify",
-            "username": "root"
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "database": "spotify",
+            "username": "postgres",
+            "name": "spotify_pg"
         }
     ]
 }
