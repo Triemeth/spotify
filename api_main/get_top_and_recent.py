@@ -6,8 +6,10 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
+import time
 
-def get_song_info(some_list, sp, paginate=True):
+
+def get_song_info(some_list, sp, paginate=True, rate_limit_delay = .3):
     return_list = []
 
     while some_list:
@@ -23,6 +25,8 @@ def get_song_info(some_list, sp, paginate=True):
                 else:
                     artist_info = items[0]
                     artist_genre = artist_info.get('genres', [])
+
+                time.sleep(rate_limit_delay)
 
                 return_list.append({
                     "track_name": song['track']['name'],
@@ -66,37 +70,6 @@ def get_song_info(some_list, sp, paginate=True):
     return_df = pd.DataFrame(return_list)
     return return_df
 
-def get_playlists(sp):
-    playlists = sp.current_user_playlists()
-    playlist_data = []
-
-    while playlists:
-        for playlist in playlists["items"]:
-            playlist_data.append({
-                "playlist_name": playlist['name'],
-                "playlist_id": playlist['id']
-            })
-        if playlists["next"]:
-            playlists = sp.next(playlists)
-        else:
-            break
-
-    playlist_df = pd.DataFrame(playlist_data)
-    return playlist_df
-
-def get_playlist_songs(playlists_df, sp):
-    master_track_list = pd.DataFrame()
-
-    for i in range(0, len(playlists_df)):
-        curr_tracks_unparsed = sp.playlist_tracks(playlists_df.iloc[i]['playlist_id'])
-        curr_track_list = get_song_info(curr_tracks_unparsed, sp)
-        curr_track_list["playlist"] = playlists_df.iloc[i]['playlist_name']
-
-        master_track_list = pd.concat([master_track_list, curr_track_list])
-                    
-    return master_track_list
-
-
 def get_recently_listened_to(sp, limit = 20):
     recent_songs = sp.current_user_recently_played(limit=limit)
     recent_song_df = get_song_info(recent_songs, sp)
@@ -120,21 +93,21 @@ def get_top_track_and_artists(sp, limit_artist = 15, limit_song = 25):
             "artist_name": short_curr_artists['items'][i]["name"],
             "artist_genres": short_curr_artists["items"][i]["genres"],
             "artist_popularity": short_curr_artists["items"][i]["popularity"],
-            "artist_followers": short_curr_artists["items"][i]["followers"],
+            "artist_followers": short_curr_artists["items"][i]["followers"]["total"],
         })
 
         med_art.append({
             "artist_name": med_curr_artists['items'][i]["name"],
             "artist_genres": med_curr_artists["items"][i]["genres"],
             "artist_popularity": med_curr_artists["items"][i]["popularity"],
-            "artist_followers": med_curr_artists["items"][i]["followers"],
+            "artist_followers": med_curr_artists["items"][i]["followers"]["total"],
         })
 
         long_art.append({
             "artist_name": long_curr_artists['items'][i]["name"],
             "artist_genres": long_curr_artists["items"][i]["genres"],
             "artist_popularity": long_curr_artists["items"][i]["popularity"],
-            "artist_followers": long_curr_artists["items"][i]["followers"],
+            "artist_followers": long_curr_artists["items"][i]["followers"]["total"],
         })
 
     short_art = pd.DataFrame(short_art)
@@ -162,8 +135,8 @@ def get_top_track_and_artists(sp, limit_artist = 15, limit_song = 25):
     top_songs = pd.concat([short_songs_df, med_songs_df, long_songs_df])
 
     return top_songs, artist_df
-    
-if __name__ == "__main__":
+
+def env_loading_stuff():
     load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
@@ -173,16 +146,6 @@ if __name__ == "__main__":
         scope="playlist-read-private playlist-read-collaborative user-read-recently-played user-top-read"
     ))
 
-    playlist = get_playlists(sp)
-    recent_songs = get_recently_listened_to(sp)
-    track_list = get_playlist_songs(playlist, sp)
-    top_songs, top_artists = get_top_track_and_artists(sp)
-
-    """recent_songs.to_csv("csv_data/recent_songs.csv")
-    track_list.to_csv("csv_data/all_tracks_saved.csv")
-    top_songs.to_csv("csv_data/top_songs.csv")
-    top_artists.to_csv("csv_data/top_artists.csv")"""
-
     db_user = os.getenv("POSTGRES_USER")
     db_pass = os.getenv("POSTGRES_PASSWORD")
     db_host = os.getenv("POSTGRES_HOST")
@@ -191,8 +154,16 @@ if __name__ == "__main__":
 
     engine = create_engine(f"postgresql+psycopg2://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}")
 
+    return sp, engine
+    
+if __name__ == "__main__":
+
+    sp, engine = env_loading_stuff()
+
+    recent_songs = get_recently_listened_to(sp)
+    top_songs, top_artists = get_top_track_and_artists(sp)
+
     recent_songs.to_sql("recent_songs", engine, if_exists="replace", index=False)
-    track_list.to_sql("all_tracks_saved", engine, if_exists="replace", index=False)
     top_songs.to_sql("top_songs", engine, if_exists="replace", index=False)
     top_artists.to_sql("top_artists", engine, if_exists="replace", index=False)
-#py -3.12 api_main/get_data.py
+#py -3.12 api_main/get_top_and_recent.py

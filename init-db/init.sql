@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS recent_songs(
     Created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS all_tracks_saved(
+CREATE TABLE IF NOT EXISTS top_artists(
     id SERIAL PRIMARY KEY,
     artist_name TEXT,
     artist_genre TEXT[],
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS all_tracks_saved(
     Created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS all_tracks_saved(
+CREATE TABLE IF NOT EXISTS top_songs(
     id SERIAL PRIMARY KEY,
     track_name TEXT,
     artist_name TEXT,
