@@ -7,6 +7,8 @@ import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
 import time
+import json
+
 
 
 def get_song_info(some_list, sp, paginate=True, rate_limit_delay = .3):
@@ -91,21 +93,21 @@ def get_top_track_and_artists(sp, limit_artist = 15, limit_song = 25):
     for i in range(0, 5):
         short_art.append({
             "artist_name": short_curr_artists['items'][i]["name"],
-            "artist_genres": short_curr_artists["items"][i]["genres"],
+            "artist_genre": short_curr_artists["items"][i]["genres"],
             "artist_popularity": short_curr_artists["items"][i]["popularity"],
             "artist_followers": short_curr_artists["items"][i]["followers"]["total"],
         })
 
         med_art.append({
             "artist_name": med_curr_artists['items'][i]["name"],
-            "artist_genres": med_curr_artists["items"][i]["genres"],
+            "artist_genre": med_curr_artists["items"][i]["genres"],
             "artist_popularity": med_curr_artists["items"][i]["popularity"],
             "artist_followers": med_curr_artists["items"][i]["followers"]["total"],
         })
 
         long_art.append({
             "artist_name": long_curr_artists['items'][i]["name"],
-            "artist_genres": long_curr_artists["items"][i]["genres"],
+            "artist_genre": long_curr_artists["items"][i]["genres"],
             "artist_popularity": long_curr_artists["items"][i]["popularity"],
             "artist_followers": long_curr_artists["items"][i]["followers"]["total"],
         })
@@ -162,6 +164,13 @@ if __name__ == "__main__":
 
     recent_songs = get_recently_listened_to(sp)
     top_songs, top_artists = get_top_track_and_artists(sp)
+
+    print(top_songs.columns)
+
+    recent_songs["artist_genre"] = recent_songs["artist_genre"].apply(json.dumps)
+    top_songs["artist_genre"] = top_songs["artist_genre"].apply(json.dumps)
+    top_artists["artist_genre"] = top_artists["artist_genre"].apply(json.dumps)
+
 
     recent_songs.to_sql("recent_songs", engine, if_exists="replace", index=False)
     top_songs.to_sql("top_songs", engine, if_exists="replace", index=False)

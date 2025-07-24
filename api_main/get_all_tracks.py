@@ -1,13 +1,6 @@
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
-import os
-from dotenv import load_dotenv
-from pathlib import Path
 import pandas as pd
-import numpy as np
-from sqlalchemy import create_engine
-import time
 from get_top_and_recent import get_song_info, env_loading_stuff
+import json
 
 def get_playlists(sp):
     playlists = sp.current_user_playlists()
@@ -44,6 +37,8 @@ if __name__ == "__main__":
 
     playlist = get_playlists(sp)
     track_list = get_playlist_songs(playlist, sp)
+
+    track_list["artist_genre"] = track_list["artist_genre"].apply(json.dumps)
 
     track_list.to_sql("all_tracks_saved", engine, if_exists="replace", index=False)
 
