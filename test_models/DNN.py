@@ -78,10 +78,10 @@ if __name__ == "__main__":
     y = all_tracks["popularity_score"].values.reshape(-1, 1)
     X = all_tracks.drop(columns=["popularity_score"])
 
-    scaler_X = MinMaxScaler()
+    scaler_X = StandardScaler()
     X_scaled = scaler_X.fit_transform(X)
 
-    scaler_y = MinMaxScaler()
+    scaler_y = StandardScaler()
     y_scaled = scaler_y.fit_transform(y)
 
     X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_scaled, test_size=0.2, random_state=19)
